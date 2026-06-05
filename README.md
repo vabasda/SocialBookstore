@@ -7,8 +7,7 @@ A full-stack enterprise web application built using **Java** and the **Spring Bo
 ## 👥 Scrum Team & Agile Governance
 
 The project was executed by an organized Scrum team across explicit user stories and targeted use-case deadlines:
-* **Product Owner:** Romanos Kotsis
-* **Scrum Master:** Konstantinos Kapsimalis
+
 * **Development Team:** Evangelos Basdavanos, Konstantinos Kapsimalis, Romanos Kotsis
 
 ### 📉 Sprint Backlog Mapping
