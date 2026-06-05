@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            position: relative;
+            background-color: #fffdf8; /* Background color of the page */
+            overflow: hidden; /* Prevent scrolling of the whole page */
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .container {
+            padding: 20px;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .left-square {
+            width: 300px;
+            height: 100vh;
+            background-color: #ec8120; /* Background color of the square */
+            border-right: 2px solid #044c86; /* Right border color */
+            padding: 20px;
+            position: relative;
+            overflow-y: auto; /* Enable vertical scrolling if needed */
+        }
+        .right-square {
+            width: 300px;
+            height: 100vh;
+            background-color: #044c86; /* Background color of the square */
+            border-left: 2px solid #ec8120; /* Left border color */
+            padding: 20px;
+            position: fixed; /* Change to fixed positioning */
+            top: 0; /* Align to the top of the viewport */
+            right: 0; /* Align to the right side of the viewport */
+            overflow-y: auto; /* Enable vertical scrolling if needed */
+        }
+        .right-square .title {
+            color: #ec8120; /* Text color in the square */
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #044c86; /* Text color in the square */
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .title::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #044c86; /* Color of the horizontal line */
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+        }
+        .myresultsfield {
+            margin-bottom: 20px;
+            background-color: #f0f0f0; /* Background color of each field */
+            border-radius: 20px; /* Rounded corners */
+            padding: 10px; /* Padding inside each field */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 98%;
+		    
+        }
+        .field {
+            margin-bottom: 20px;
+            background-color: #f0f0f0; /* Background color of each field */
+            border-radius: 20px; /* Rounded corners */
+            padding: 10px; /* Padding inside each field */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 280px;
+		    
+        }
+        
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #044c86; /* Text color in the square */
+            margin-bottom: 5px;
+        }
+        .category {
+            font-size: 15px;
+            color: #044c86; /* Text color in the square */
+            margin-top: 5px;
+            
+        }
+        .authors {
+            font-size: 15px;
+            color: #044c86; /* Text color in the square */
+            margin-top: 5px;
+        }
+        .book-info {
+		    display: flex;
+		    flex-direction: column;
+		}
+        .offerer {
+            font-size: 15px;
+            color: #044c86; /* Text color in the square */
+        }
+        .book-title2 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #044c86; /* Text color in the square */
+            margin-bottom: 5px;
+        }
+        .fullname {
+        	font-size: 14px;
+            color: #044c86; /* Text color in the square */
+        }
+
+        .close-btn {
+            background-color: #ffcccc;
+            color: #ff0000;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+        .accept-btn {
+            background-color: #ccffcc;
+            color: #00ff00;
+            border: none;
+            border-radius: 10px;
+            width: auto;
+            height: 20px;
+            padding: 0 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .accept-btn:hover {
+            background-color: #00ff00;
+            color: #ffffff;
+        }
+        .makerequest-btn {
+            background-color: #ccffcc;
+            color: #00ff00;
+            border: none;
+            border-radius: 10px;
+            width: auto;
+            height: 40px;
+            padding: 0 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .makerequest-btn:hover {
+            background-color: #00ff00;
+            color: #ffffff;
+        }
+        .add-offer {
+            background-color: #f0f0f0; /* Background color of the "Add Offer" button */
+            color: #044c86; /* Text color of the "Add Offer" button */
+            border-radius: 20px; /* Rounded corners */
+            padding: 10px; /* Padding inside the button */
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .add-offer:hover {
+            background-color: #044c86; /* Hover background color */
+            color: #fff; /* Hover text color */
+        }
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: #d32f2f;
+        }
+        .horizontal-line {
+            width: 100%;
+            height: 2px;
+            background-color: #ec8120; /* Color of the horizontal line */
+            margin-bottom: 20px; /* Adjust as needed */
+        }
+        .notification-square {
+            width: 400px;
+            height: 65%;
+            background-color: #fdfaf0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: fixed;
+            top: 35%;
+            right: 450px;
+            overflow-y: auto;
+        }
+        .searchResult-square {
+            width: 400px;
+            height: 65%;
+            background-color: #fdfaf0; 
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: fixed;
+            top: 35%;
+            left: 450px;
+            overflow-y: auto;
+        }
+        .search-container {
+		    display: flex;
+		    align-items: center;
+		     justify-content: center;
+		    width:  30%;
+		    height: 5%;
+		    position: fixed;
+		    top: 18%;
+		    left: 35%;
+		}
+		.search-input, .location-input {
+		    padding: 8px;
+		    align-items: center;
+		    margin-right: 10px;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		}
+		
+		.search-button {
+		    padding: 8px 16px;
+		    background-color: #4CAF50;
+		    color: white;
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;
+		}
+		
+		.search-button:hover {
+		    background-color: #45a049;
+		}
+		.searchbyauthor-button,
+		.searchbycategory-button,
+		.searchbyboth-button {
+		     padding: 8px 16px;
+		    background-color: #4CAF50;
+		    color: white;
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;	
+		    margin: 0 3px;
+		}
+		
+		.searchbyauthor-button:hover,
+		.searchbycategory-button:hover,
+		.searchbyboth-button:hover {
+		    background-color: #45a049;
+		}
+
+		.searchbyfield-container {
+		   display: flex;
+		    align-items: center;
+		     justify-content: space-between;;
+		    width:  45%;
+		    height: 5%;
+		    position: fixed;
+		    top: 27%;
+		    left: 29%;
+		}
+    </style>
+    
+    <script>
+   function submitForm() {
+    var form = document.getElementById("MyOffers");
+    form.submit();
+	}
+	
+	
+	function acceptRequest(formId) {
+    var form = document.getElementById(formId);
+    form.submit();
+}
+
+function searchForm() {
+    var form = document.getElementById("searchForm");
+    form.submit();
+}
+
+function makeRequest() {
+    var form = document.getElementById("requestForm");
+    form.submit();
+}
+
+	
+</script>
+
+	
+
+</head>
+<body>
+    <img class="logo" src="logo.png" alt="Logo">
+    <div class="left-square">
+    	<div class="title">My Offers</div>
+        <form id="MyOffers" action="makeOffer" method="post">
+            <button type="button" class="add-offer" onclick="submitForm()" style="width: 300px;">Make a Book Offer</button>
+        </form>
+        <div class="content">
+            <div th:each="offer : ${myOffers}">
+                <div class="field">
+                <div class="book-info">
+                    <div class="book-title" th:text="${offer[0]}"></div>
+                    <div class="authors">
+                
+                        <span th:each="author, iterStat : ${offer.subList(1, offer.size())}">
+                            <span th:text="${author}"></span>
+                            <span th:if="${iterStat.index} != ${offer.size() - 2}">,</span>
+                        </span>
+                    </div>
+                </div>
+                    <form action="/removeOffer" method="post">
+                        <input type="hidden" name="bookTitle" th:value="${offer[0]}" />
+                        <button type="submit" class="close-btn">X</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+	</div>
+    <div class="right-square">
+        <div class="title">My Requests</div>
+        <div class="horizontal-line"></div>
+        <div class="content">
+	        <div th:each="request : ${myRequestsInfo}">
+				<div class="field">
+					
+					<form action="acceptRequest" method="post" id="acceptForm">
+						
+					    <input type="hidden" name="booktitle2" th:value="${request[0]}">
+					    <input type="hidden" name="username" th:value="${request[1]}">
+				
+					    <button type="button" class="accept-btn" onclick="acceptRequest('acceptForm')">Accept</button>
+
+
+					</form>
+					
+					
+					<div class="booktitle2" th:text="${request[0]}"></div>
+					<div class="username" th:text="${request[1]}"></div>
+	            </div>
+	        </div>
+	        
+    	</div>
+	</div><div class="notification-square">
+    <div class="title">My Notifications</div>
+    <div class="content">
+        <div th:each="message : ${messages}">
+            <div class="myresultsfield">
+                <div class="message" th:utext="${message}"></div>
+                <form action="deleteNotification" method="post">
+                <input type="hidden" name="message" th:value="${message}">
+                    <button type="submit" class="close-btn">X</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="search-container">
+	<form action="search" method="get" id="searchForm">
+	    <input type="text" placeholder="Enter a book title" class="search-input" name="title">
+	    <input type="text" placeholder="Enter book author(s)" class="location-input" name="author">
+   		<button type="button" class="search-button" onclick="searchForm()">Search</button>
+   	</form>
+</div>
+
+<div class="searchResult-square">
+    <div class="title">My Results</div>
+    <div class="content"> 
+        <div class="myresultsfield" th:each="bookOfferDetails : ${bookOffersDetails}">
+            <div class="myresultsfield">
+            	<div class="book-info">
+                    <div class="book-title" th:text="${bookOfferDetails[0]}"></div>
+                    <div class="authors" th:text="${bookOfferDetails[1]}"></div>
+                    <div class="category" th:text="${bookOfferDetails[2]}"></div>
+                </div>       
+                
+                <div class="offerer" th:text="'Provided by: ' +${bookOfferDetails[3]}"></div>
+                <form action="makeRequest" method="post" id="requestForm">
+                	<input type="hidden" name="book-title" th:value="${bookOfferDetails[0]}" />
+                    <input type="hidden" name="offerer" th:value="${bookOfferDetails[3]}" />
+                    <button type="submit" class="makerequest-btn" onclick="makeRequest()">Make Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="searchbyfield-container">
+	<form action="searchByCategory" method="get">
+   		<button type="submit" class="searchbycategory-button" >Search By My Favourite Categories</button>
+   	</form>
+   	<form action="searchByAuthor" method="get" >
+   		<button type="submit" class="searchbyauthor-button" >Search By My Favourite Authors</button>
+   	</form>
+   	<form action="searchByBoth" method="get">
+   		<button type="submit" class="searchbyboth-button" >Search By My Favourite Categories & Authors</button>
+   	</form>
+</div>
+    
+    <form class="logout-form" action="logout" method="get">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+    
+    
+    
+</body>
+</html>

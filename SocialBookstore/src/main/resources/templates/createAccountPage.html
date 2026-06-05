@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffdf8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+		
+        .container {
+            background-color: #ec8120;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+		h4 {
+			margin-bottom: 0;
+			margin-top: 10px;
+		}
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            
+        }
+
+        input[type="submit"] {
+            background-color: #044c86;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #044ca6;
+        }
+        .error-box {
+            background-color: #ffcccc; /* Red background color */
+            color: #cc0000; /* Red text color */
+            padding: 10px; /* Padding inside the box */
+            margin-bottom: 10px; /* Margin at the bottom to separate from other elements */
+            border: 1px solid #cc0000; /* Red border */
+            border-radius: 5px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+        <form action="register"  method="post">
+        
+            <label for="username"><h4>Username</h4></label>
+            <input type="text"  name="username" required />
+		
+            <label for="password"><h4>Password</h4></label>
+            <input type="password" name="password" required />
+		
+            <label for="fullName"><h4>Full Name</h4></label>
+            <input type="text"  name="fullName" required />
+		
+            <label for="address"><h4>Address</h4></label>
+            <input type="text"  name="address" required / >
+			
+            <label for="age"><h4>Age</h4></label>
+            <input type="number" name="age" min="1" step="1" required / >
+		
+            <label for="phoneNumber"><h4>Phone Number</h4></label>
+            <input type="text" name="phoneNumber"  required />
+			
+			<label for="authors"><h4>Authors</h4></label>
+            <input type="text" name="authors" required />
+			
+<label for="categories"><h4>Categories</h4></label>
+<table>
+    <tr>
+        <!-- Categories on the left -->
+        <td>
+            <input type="checkbox" id="Action" name="categories" value="Action"><br>
+            <label for="Action">Action</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Drama" name="categories" value="Drama"><br>
+            <label for="Drama">Drama</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Comedy" name="categories" value="Comedy"><br>
+            <label for="Comedy">Comedy</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Fantasy" name="categories" value="Fantasy"><br>
+            <label for="Fantasy">Fantasy</label>
+        </td>
+        
+    </tr>
+    <tr>
+        <!-- Categories on the right -->
+        <td>
+            <input type="checkbox" id="Horror" name="categories" value="Horror"><br>
+            <label for="Horror">Horror</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Mystery" name="categories" value="Mystery"><br>
+            <label for="Mystery">Mystery</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Romance" name="categories" value="Romance"><br>
+            <label for="Romance">Romance</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Thriller" name="categories" value="Thriller"><br>
+            <label for="Thriller">Thriller</label>
+        </td>
+        
+    </tr>
+    <tr>
+    	<td>
+            <input type="checkbox" id="Biography" name="categories" value="Biography"><br>
+            <label for="Biography">Biography</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Sciencefiction" name="categories" value="Sciencefiction"><br>
+            <label for="Sciencefiction">Science fiction</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Adventure" name="categories" value="Adventure"><br>
+            <label for="Adventure">Adventure</label>
+        </td>
+        <td>
+            <input type="checkbox" id="Historical" name="categories" value="Historical"><br>
+            <label for="Historical">Historical</label>
+        </td>
+    </tr>
+</table>
+	  <div th:if="${errorMessage}" class="error-box">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+            <input type="submit" value="Create Account">
+        </form>
+</body>
+</html>
